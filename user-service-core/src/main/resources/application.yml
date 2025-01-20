@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: USER_SERVICE_CORE
+  datasource:
+    url: ${DATA_SOURCE_URL}
+    username: ${DATA_SOURCE_USERNAME}
+    password: ${DATA_SOURCE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+
+
+server:
+  port: ${SERVER_PORT}
