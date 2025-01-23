@@ -1,13 +1,17 @@
 package com.webculcate.userservice.core.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.webculcate.userservice.core.model.entity.User;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import static com.webculcate.userservice.core.constant.APIMetadata.USER_CREATION;
 import static com.webculcate.userservice.core.constant.ServiceConstant.*;
 import static com.webculcate.userservice.core.utility.ServiceHelper.nullHandledExtraction;
 
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
+@NoArgsConstructor
 public class UserCreationResponse {
 
     private String displayName;

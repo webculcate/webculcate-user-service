@@ -7,9 +7,16 @@ spring:
     password: ${DATA_SOURCE_PASSWORD}
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true
-
 
 server:
   port: ${SERVER_PORT}
+
+application:
+  proxy:
+    enabled: true
+  bulk:
+    request:
+      user:
+        limit: 20

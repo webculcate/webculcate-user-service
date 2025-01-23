@@ -4,8 +4,10 @@ import com.webculcate.userservice.core.model.entity.embedded.ContactInfo;
 import com.webculcate.userservice.core.model.entity.embedded.TimeLog;
 import com.webculcate.userservice.core.model.entity.embedded.UserName;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import static com.webculcate.userservice.core.constant.ServiceConstant.USER_SEQUENCE_NAME;
 import static com.webculcate.userservice.core.constant.ServiceConstant.USER_TABLE_NAME;
@@ -14,6 +16,8 @@ import static com.webculcate.userservice.core.constant.ServiceConstant.USER_TABL
 @Builder
 @Entity
 @Table(name = USER_TABLE_NAME)
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id

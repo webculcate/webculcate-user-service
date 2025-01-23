@@ -16,5 +16,8 @@ public class ServiceConstant {
     // common
 
     public static final String EMPTY_STRING = "";
+    public static final String STRING_SPACE = " ";
     public static final Long LONG_NUMBER_ZERO = 0L;
+    public static final String PROXY_ENABLED = "${application.proxy.enabled}";
+
 }
