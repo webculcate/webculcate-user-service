@@ -1,7 +1,6 @@
-package com.webculcate.userservice.core.model.dto;
+package com.webculcate.userservice.core.model.dto.general;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -10,8 +9,9 @@ import lombok.Data;
 public class UserCreationRequest {
 
     @NotNull
-    private UserNameRequest userNameRequest;
+    private UserNameRequest userName;
 
     @NotNull
-    private ContactInfoRequest contactInfoRequest;
+    private ContactInfoRequest contactInfo;
+
 }

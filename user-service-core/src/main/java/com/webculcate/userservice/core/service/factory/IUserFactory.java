@@ -1,8 +1,7 @@
 package com.webculcate.userservice.core.service.factory;
 
 import com.webculcate.userservice.core.model.entity.User;
-import com.webculcate.userservice.core.model.dto.UserCreationRequest;
-import org.springframework.stereotype.Service;
+import com.webculcate.userservice.core.model.dto.general.UserCreationRequest;
 
 public interface IUserFactory {
 

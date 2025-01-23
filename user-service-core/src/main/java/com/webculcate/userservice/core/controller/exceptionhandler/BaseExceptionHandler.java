@@ -1,10 +1,9 @@
 package com.webculcate.userservice.core.controller.exceptionhandler;
 
-import com.webculcate.userservice.core.constant.ServiceExceptionType;
 import com.webculcate.userservice.core.exception.InvalidUserCreationRequestException;
 import com.webculcate.userservice.core.exception.UserIdCountExceededException;
 import com.webculcate.userservice.core.exception.UserNotAvailableException;
-import com.webculcate.userservice.core.model.dto.ServiceExceptionResponse;
+import com.webculcate.userservice.core.model.dto.general.ServiceExceptionResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

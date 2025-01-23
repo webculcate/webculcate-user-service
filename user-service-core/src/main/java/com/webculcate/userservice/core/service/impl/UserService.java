@@ -1,14 +1,14 @@
 package com.webculcate.userservice.core.service.impl;
 
 import com.webculcate.userservice.core.exception.UserNotAvailableException;
-import com.webculcate.userservice.core.model.UserUpdateRequest;
-import com.webculcate.userservice.core.model.UserUpdateResponse;
-import com.webculcate.userservice.core.model.dto.UserBulkRequest;
-import com.webculcate.userservice.core.model.dto.UserBulkResponse;
+import com.webculcate.userservice.core.model.dto.general.UserUpdateRequest;
+import com.webculcate.userservice.core.model.dto.general.UserUpdateResponse;
+import com.webculcate.userservice.core.model.dto.general.UserBulkRequest;
+import com.webculcate.userservice.core.model.dto.general.UserBulkResponse;
 import com.webculcate.userservice.core.model.dto.user.UserDto;
 import com.webculcate.userservice.core.model.entity.User;
-import com.webculcate.userservice.core.model.dto.UserCreationRequest;
-import com.webculcate.userservice.core.model.dto.UserCreationResponse;
+import com.webculcate.userservice.core.model.dto.general.UserCreationRequest;
+import com.webculcate.userservice.core.model.dto.general.UserCreationResponse;
 import com.webculcate.userservice.core.repository.UserRepository;
 import com.webculcate.userservice.core.service.IUserService;
 import com.webculcate.userservice.core.service.IUserDtoMapper;
@@ -16,6 +16,7 @@ import com.webculcate.userservice.core.service.factory.IUserFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +24,6 @@ import java.util.Set;
 
 import static com.webculcate.userservice.core.constant.ServiceExceptionType.USER_NOT_AVAILABLE;
 import static com.webculcate.userservice.core.constant.UserServiceStrategyType.DEFAULT_SERVICE;
-import static org.springframework.beans.BeanUtils.copyProperties;
 
 
 @Slf4j
@@ -39,10 +39,15 @@ public class UserService implements IUserService {
 
     @Override
     public UserDto getUser(Long id) {
-        Optional<User> optionalUser = repository.findByUserId(id);
+        Optional<User> optionalUser = fetchUser(id);
         User fetchedUser = optionalUser
                 .orElseThrow(() -> new UserNotAvailableException(USER_NOT_AVAILABLE.getMessage()));
         return userDtoMapper.mapToUserDto(fetchedUser);
+    }
+
+    @Transactional
+    private Optional<User> fetchUser(Long id) {
+        return repository.findByUserId(id);
     }
 
     @Override
@@ -50,7 +55,7 @@ public class UserService implements IUserService {
         Set<String> userIdSet = request.getUserIdSet();
         UserBulkResponse response = new UserBulkResponse();
         if (!userIdSet.isEmpty()) {
-            List<User> fetchedUsers = repository.findAllByUserId(userIdSet);
+            List<User> fetchedUsers = fetchUsers(userIdSet);
             List<UserDto> userDtoList = fetchedUsers.stream()
                     .map(userDtoMapper::mapToUserDto)
                     .toList();
@@ -59,23 +64,39 @@ public class UserService implements IUserService {
         return response;
     }
 
+    @Transactional
+    private List<User> fetchUsers(Set<String> userIdSet) {
+        return repository.findAllByUserIdIn(userIdSet);
+    }
+
     @Override
     public UserCreationResponse createUser(UserCreationRequest request) {
         User newUser = userFactory.generateUser(request);
-        User savedUser = repository.save(newUser);
-        return new UserCreationResponse(savedUser);
+        User savedUser = saveUser(newUser);
+        return new UserCreationResponse(userDtoMapper.mapToUserDto(savedUser));
+    }
+
+    @Transactional
+    private User saveUser(User newUser) {
+        return repository.save(newUser);
     }
 
     @Override
     public UserUpdateResponse updateUser(UserUpdateRequest request) {
-        Optional<User> optionalUser = repository.findByUserId(request.getUserId());
+        User updatedUser = userFactory.generateUser(request);
+        User savedUser = fetchAndUpdateUser(request, updatedUser);
+        return new UserUpdateResponse(userDtoMapper.mapToUserDto(savedUser));
+    }
+
+    @Transactional
+    private User fetchAndUpdateUser(UserUpdateRequest request, User updatedUser) {
+        Optional<User> optionalUser = fetchUser(request.getUserId());
         User fetchedUser = optionalUser
                 .orElseThrow(() -> new UserNotAvailableException(USER_NOT_AVAILABLE.getMessage()));
-        User updatedUser = userFactory.generateUser(request);
         fetchedUser.setContactInfo(updatedUser.getContactInfo());
         fetchedUser.setUserName(updatedUser.getUserName());
-        fetchedUser.getTimeLog().setModificationTime(System.currentTimeMillis());
-        User savedUser = repository.save(fetchedUser);
-        return new UserUpdateResponse(savedUser);
+        //fetchedUser.getTimeLog().setModificationTime(System.currentTimeMillis());
+        User savedUser = saveUser(fetchedUser);
+        return savedUser;
     }
 }

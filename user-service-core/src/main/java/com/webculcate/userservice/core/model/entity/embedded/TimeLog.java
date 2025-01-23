@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 @Data
 @Embeddable
@@ -13,9 +15,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TimeLog {
 
+    @CreatedDate
     @Column(nullable = false)
     private Long creationTime;
 
+    @LastModifiedDate
     @Column(nullable = false)
     private Long modificationTime;
 }

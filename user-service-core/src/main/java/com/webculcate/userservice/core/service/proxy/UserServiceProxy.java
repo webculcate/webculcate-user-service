@@ -2,12 +2,12 @@ package com.webculcate.userservice.core.service.proxy;
 
 import com.webculcate.userservice.core.exception.InvalidUserCreationRequestException;
 import com.webculcate.userservice.core.exception.UserIdCountExceededException;
-import com.webculcate.userservice.core.model.UserUpdateRequest;
-import com.webculcate.userservice.core.model.UserUpdateResponse;
-import com.webculcate.userservice.core.model.dto.UserBulkRequest;
-import com.webculcate.userservice.core.model.dto.UserBulkResponse;
-import com.webculcate.userservice.core.model.dto.UserCreationRequest;
-import com.webculcate.userservice.core.model.dto.UserCreationResponse;
+import com.webculcate.userservice.core.model.dto.general.UserUpdateRequest;
+import com.webculcate.userservice.core.model.dto.general.UserUpdateResponse;
+import com.webculcate.userservice.core.model.dto.general.UserBulkRequest;
+import com.webculcate.userservice.core.model.dto.general.UserBulkResponse;
+import com.webculcate.userservice.core.model.dto.general.UserCreationRequest;
+import com.webculcate.userservice.core.model.dto.general.UserCreationResponse;
 import com.webculcate.userservice.core.model.dto.user.UserDto;
 import com.webculcate.userservice.core.service.IUserService;
 import jakarta.validation.ConstraintViolation;

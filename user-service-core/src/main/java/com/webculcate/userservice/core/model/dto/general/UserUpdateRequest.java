@@ -1,7 +1,6 @@
-package com.webculcate.userservice.core.model;
+package com.webculcate.userservice.core.model.dto.general;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.webculcate.userservice.core.model.dto.UserCreationRequest;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

@@ -7,7 +7,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum APIMetadata {
 
-    USER_CREATION("User creation successful", "User creation failed");
+    USER_CREATION("User creation successful", "User creation failed"),
+    USER_MODIFICATION("User updated successfully", "Failed to update user");
 
     private final String successMessage;
 
