@@ -12,6 +12,14 @@ spring:
 
 server:
   port: ${SERVER_PORT}
+eureka:
+  instance:
+    prefer-ip-address: false
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: ${REGISTRY_PATH}
 
 application:
   proxy:
