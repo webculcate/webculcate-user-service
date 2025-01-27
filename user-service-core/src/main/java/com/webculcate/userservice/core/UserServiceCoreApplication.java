@@ -10,6 +10,7 @@ public class UserServiceCoreApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(UserServiceCoreApplication.class, args);
+		// added one comment - 404
 	}
 
 }
