@@ -5,5 +5,5 @@ import com.webculcate.userservice.core.model.dto.general.UserCreationRequest;
 
 public interface IUserFactory {
 
-    public User generateUser(UserCreationRequest request);
+    User generateUser(UserCreationRequest request);
 }

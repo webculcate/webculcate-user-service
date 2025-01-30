@@ -84,18 +84,17 @@ public class UserService implements IUserService {
     @Override
     public UserUpdateResponse updateUser(UserUpdateRequest request) {
         User updatedUser = userFactory.generateUser(request);
-        User savedUser = fetchAndUpdateUser(request, updatedUser);
+        User savedUser = fetchAndUpdateUser(request.getUserId(), updatedUser);
         return new UserUpdateResponse(userDtoMapper.mapToUserDto(savedUser));
     }
 
     @Transactional
-    private User fetchAndUpdateUser(UserUpdateRequest request, User updatedUser) {
-        Optional<User> optionalUser = fetchUser(request.getUserId());
+    private User fetchAndUpdateUser(Long userId, User updatedUser) {
+        Optional<User> optionalUser = fetchUser(userId);
         User fetchedUser = optionalUser
                 .orElseThrow(() -> new UserNotAvailableException(USER_NOT_AVAILABLE.getMessage()));
         fetchedUser.setContactInfo(updatedUser.getContactInfo());
         fetchedUser.setUserName(updatedUser.getUserName());
-        //fetchedUser.getTimeLog().setModificationTime(System.currentTimeMillis());
         User savedUser = saveUser(fetchedUser);
         return savedUser;
     }
