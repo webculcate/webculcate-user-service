@@ -8,7 +8,7 @@ import com.webculcate.userservice.core.model.dto.general.UserCreationRequest;
 import com.webculcate.userservice.core.model.dto.general.UserCreationResponse;
 import com.webculcate.userservice.core.model.dto.user.UserDto;
 import com.webculcate.userservice.core.service.IUserService;
-import com.webculcate.userservice.core.service.UserServiceManager.UserServiceManager;
+import com.webculcate.userservice.core.service.UserServiceManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

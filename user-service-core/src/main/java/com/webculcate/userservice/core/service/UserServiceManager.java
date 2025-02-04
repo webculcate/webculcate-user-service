@@ -1,6 +1,5 @@
-package com.webculcate.userservice.core.service.UserServiceManager;
+package com.webculcate.userservice.core.service;
 
-import com.webculcate.userservice.core.service.IUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
