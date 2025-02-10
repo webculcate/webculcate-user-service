@@ -9,6 +9,6 @@ import java.util.Set;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserBulkRequest {
     // TODO validation
-    private Set<String> userIdSet;
+    private Set<Long> userIdSet;
 
 }

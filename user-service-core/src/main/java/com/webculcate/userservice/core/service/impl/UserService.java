@@ -52,7 +52,7 @@ public class UserService implements IUserService {
 
     @Override
     public UserBulkResponse getUserBulk(UserBulkRequest request) {
-        Set<String> userIdSet = request.getUserIdSet();
+        Set<Long> userIdSet = request.getUserIdSet();
         UserBulkResponse response = new UserBulkResponse();
         if (!userIdSet.isEmpty()) {
             List<User> fetchedUsers = fetchUsers(userIdSet);
@@ -65,7 +65,7 @@ public class UserService implements IUserService {
     }
 
     @Transactional
-    private List<User> fetchUsers(Set<String> userIdSet) {
+    private List<User> fetchUsers(Set<Long> userIdSet) {
         return repository.findAllByUserIdIn(userIdSet);
     }
 

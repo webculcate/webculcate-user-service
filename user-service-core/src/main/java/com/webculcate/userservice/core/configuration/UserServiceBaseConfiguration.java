@@ -14,4 +14,5 @@ public class UserServiceBaseConfiguration {
     public Validator createValidator() {
         return Validation.buildDefaultValidatorFactory().getValidator();
     }
+
 }

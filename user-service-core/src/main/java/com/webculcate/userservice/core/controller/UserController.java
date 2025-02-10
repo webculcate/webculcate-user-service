@@ -28,7 +28,7 @@ public class UserController {
         return new ResponseEntity<>(userService.getUser(id), OK);
     }
 
-    @GetMapping("/bulk")
+    @PostMapping("/bulk")
     public ResponseEntity<UserBulkResponse> getUserBulk(@RequestBody UserBulkRequest request) {
         IUserService userService = userServiceManager.getUserService();
         return new ResponseEntity<>(userService.getUserBulk(request), OK);
