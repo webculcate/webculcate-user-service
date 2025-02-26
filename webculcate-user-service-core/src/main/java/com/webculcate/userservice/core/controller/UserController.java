@@ -1,11 +1,6 @@
 package com.webculcate.userservice.core.controller;
 
-import com.webculcate.userservice.core.model.dto.general.UserUpdateRequest;
-import com.webculcate.userservice.core.model.dto.general.UserUpdateResponse;
-import com.webculcate.userservice.core.model.dto.general.UserBulkRequest;
-import com.webculcate.userservice.core.model.dto.general.UserBulkResponse;
-import com.webculcate.userservice.core.model.dto.general.UserCreationRequest;
-import com.webculcate.userservice.core.model.dto.general.UserCreationResponse;
+import com.webculcate.userservice.core.model.dto.general.*;
 import com.webculcate.userservice.core.model.dto.user.UserDto;
 import com.webculcate.userservice.core.service.IUserService;
 import com.webculcate.userservice.core.service.UserServiceManager;

@@ -1,8 +1,6 @@
 package com.webculcate.userservice.core.controller.exceptionhandler;
 
-import com.webculcate.userservice.core.exception.InvalidUserCreationRequestException;
-import com.webculcate.userservice.core.exception.UserIdCountExceededException;
-import com.webculcate.userservice.core.exception.UserNotAvailableException;
+import com.webculcate.userservice.core.exception.*;
 import com.webculcate.userservice.core.model.dto.general.ServiceExceptionResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -24,6 +22,26 @@ public class BaseExceptionHandler {
                 .body(new ServiceExceptionResponse(
                         INVALID_USER_CREATION_REQUEST,
                         INVALID_USER_CREATION_REQUEST.getMessage(),
+                        List.of(exception.getMessageList()))
+                );
+    }
+
+    @ExceptionHandler(InvalidUserUpdateRequestException.class)
+    public ResponseEntity<ServiceExceptionResponse> handleUserUpdateException(InvalidUserUpdateRequestException exception) {
+        return ResponseEntity.status(BAD_REQUEST)
+                .body(new ServiceExceptionResponse(
+                        INVALID_USER_UPDATE_REQUEST,
+                        INVALID_USER_UPDATE_REQUEST.getMessage(),
+                        List.of(exception.getMessageList()))
+                );
+    }
+
+    @ExceptionHandler(InvalidUserBulkRequestException.class)
+    public ResponseEntity<ServiceExceptionResponse> handleUserBulkException(InvalidUserBulkRequestException exception) {
+        return ResponseEntity.status(BAD_REQUEST)
+                .body(new ServiceExceptionResponse(
+                        INVALID_USER_BULK_REQUEST,
+                        INVALID_USER_BULK_REQUEST.getMessage(),
                         List.of(exception.getMessageList()))
                 );
     }
